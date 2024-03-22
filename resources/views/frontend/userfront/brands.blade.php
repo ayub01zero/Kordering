@@ -2,6 +2,8 @@
 @section('interface')
 
 
+
+
  <!-- ======= Portfolio Section ======= -->
  <section id="portfolio" class="portfolio">
     <div class="container">
@@ -14,22 +16,23 @@
 
 
       <div class="row portfolio-container">
-
+        @foreach ($items as $item)
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+            <img src="{{ asset('storage/' . $item->image) }}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
+              <h4>{{ $item->name }}</h4>
+              <p>{{ $item->description }}</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="ri-add-fill"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="ri-links-fill"></i></a>
+                <a href="{{ $item->url }}"><i class="fa-solid fa-link"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="ri-links-fill"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
+        @endforeach
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        {{-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
           <div class="portfolio-wrap">
             <img src="assets/img/portfolio/girl1.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
@@ -139,7 +142,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
       </div>
 

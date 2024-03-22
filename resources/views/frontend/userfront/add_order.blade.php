@@ -3,71 +3,50 @@
 
 <div class="wrapper bg-white">
     <form action="#">
+        <!-- Country Selection -->
         <div class="form-group border-bottom d-flex align-items-center justify-content-between flex-wrap">
             <label class="option my-sm-0 my-2">
-                <input type="radio" name="radio" checked>Turkey
+                <input type="radio" name="country" value="Turkey" checked> Turkey
                 <span class="checkmark"></span>
             </label>
             <label class="option my-sm-0 my-2">
-                <input type="radio" name="radio">USA
+                <input type="radio" name="country" value="USA"> USA
                 <span class="checkmark"></span>
             </label>
-            <div class="d-flex align-items-center my-sm-0 my-2">
-                <a href="#" class="text-decoration-none">
-                    Multi-city/Stopovers <span class="fas fa-angle-right ps-2 text-primary"></span>
-                </a>
-            </div>
         </div>
+
+        <!-- Link -->
+        <div class="form-group border-bottom">
+            <input type="url" class="form-control" required placeholder="Link">
+        </div>
+
+        <!-- Quantity, Color -->
         <div class="form-group d-sm-flex margin">
             <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="text" required placeholder="From" class="form-control">
-                <div class="label" id="from"></div>
-                <span class="fas fa-dot-circle text-muted"></span>
+                <input type="number" required placeholder="Quantity" class="form-control">
             </div>
             <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="text" required placeholder="To" class="form-control">
-                <div class="label" id="to"></div>
-                <span class="fas fa-map-marker text-muted"></span>
+                <input type="text" required placeholder="Color" class="form-control">
             </div>
         </div>
 
-
-        <div class="form-group d-sm-flex margin">
-            <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="file" required placeholder="From" class="form-control">
-                <div class="label" id="from"></div>
-                <span class="fas fa-dot-circle text-muted"></span>
-            </div>
-            <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="text" required placeholder="To" class="form-control">
-                <div class="label" id="to"></div>
-                <span class="fas fa-map-marker text-muted"></span>
-            </div>
+        <!-- Image -->
+        <div class="form-group border-bottom">
+            <input type="file" class="form-control" required accept="image/*">
         </div>
 
+        <!-- Description -->
+        <div class="form-group">
+            <textarea class="form-control" required placeholder="Description"></textarea>
+        </div>
 
-        <div class="form-group d-sm-flex margin">
-            <div class="d-flex align-items-center flex-fill me-sm1 my-sm-0 border-bottom position-relative">
-                <input type="date" required placeholder="Depart Date" class="form-control">
-                <div class="label" id="depart"></div>
-            </div>
-            <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="date" required placeholder="Return Date" class="form-control">
-                <div class="label" id="return"></div>
-            </div>
-        </div>
-        <div class="form-group border-bottom d-flex align-items-center position-relative">
-            <input type="text" required placeholder="Traveller(s)" class="form-control">
-            <div class="label" id="psngr"></div>
-            <span class="fas fa-users text-muted"></span>
-        </div>
+        <!-- Search Button -->
         <div class="form-group my-3">
-            <div class="btn melon rounded-0 d-flex justify-content-center text-center p-3">Search Flights
-            </div>
+            <div class="btn melon rounded-0 d-flex justify-content-center text-center p-3">Order Now</div>
         </div>
     </form>
-
 </div>
+
 
 <style>
 

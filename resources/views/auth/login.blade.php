@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Boostrap Login | Ludiflex</title>
+    <title>hello Kordering</title>
 </head>
 <body>
 
@@ -31,22 +31,31 @@
 
     <!-------------------- ------ Right Box ---------------------------->
 
-       <div class="col-md-6 right-box">
-          <div class="row align-items-center">
-                <div class="header-text mb-4">
-                     <h2>Hello,Again</h2>
-                     <p>We are happy to have you back.</p>
-                </div>
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
+    <div class="col-md-6 right-box">
+        <div class="row align-items-center">
+            <div class="header-text mb-3">
+                <h2>Hello, Again</h2>
+                <p>We are happy to have you back.</p>
+            </div>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
                 <div class="input-group mb-3">
-                    <input type="email" name="email" id="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+                    <input type="email" name="email" id="email" class="form-control form-control-lg bg-light fs-6 @error('email') is-invalid @enderror" placeholder="Email address" value="{{ old('email') }}">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="input-group mb-1">
-                    <input type="password" name="password" id="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
+                    <input type="password" name="password" id="password" class="form-control form-control-lg bg-light fs-6 @error('password') is-invalid @enderror" placeholder="Password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="input-group mb-5 d-flex justify-content-between">
-                    
                     <div class="forgot">
                         <small><a href="{{ route('password.request') }}">Forgot Password?</a></small>
                     </div>
@@ -54,9 +63,15 @@
                 <div class="input-group mb-3">
                     <button type="submit" class="btn btn-lg w-100 fs-6">Login</button>
                 </div>
+                <div class="input-group mb-2 d-flex justify-content-between">
+                    <div class="forgot">
+                        <small><a href="{{ route('register') }}">Register</a></small>
+                    </div>
+                </div>
             </form>
-          </div>
-       </div> 
+        </div>
+    </div>
+    
   
 
       </div>
