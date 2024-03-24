@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\OrderController;
 
 //about routes
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
@@ -17,8 +19,28 @@ Route::get('/user/profile', [ProfileController::class, 'index'])->name('user.pro
 //logout routes
 Route::get('/logout/auth', [ProfileController::class, 'logout'])->name('logout.auth');
 
+//addcart
+Route::post('/add/to/cart', [CartController::class, 'AddToCart'])->name('Add.Cart');
+Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/process/checkout', [CartController::class, 'processCheckout'])->name('checkout.process');
+
+// all orders
+Route::get('/orders', [OrderController::class, 'fetchOrders'])->name('orders.all');
+
+//change dolar
+Route::post('/convert', [OrderController::class, 'convertCurrency'])->name('convert.currency');
+
+Route::get('/cart', function () {
+    return view('frontend.userfront.cart');
 });
 
+Route::get('/add/order', function () {
+    return view('frontend.userfront.add_order');
+})->name('add.order');
+
+});
+
+Route::get('/about', [ContactController::class, 'index'])->name('about.us');
 
 Route::get('/', function () {
     $items = App\Models\Brands::all();
@@ -38,23 +60,7 @@ Route::get('/brands', function () {
 
 
 
-Route::get('/contact', function () {
-    return view('frontend.userfront.contact');
-});
 
-
-
-Route::get('/cart', function () {
-    return view('frontend.userfront.cart');
-});
-
-Route::get('/add/order', function () {
-    return view('frontend.userfront.add_order');
-});
-
-Route::get('/orders', function () {
-    return view('frontend.userfront.orders');
-});
 
 
 

@@ -19,6 +19,7 @@ class Order extends Model
         'custom_fee',
         'order_price',
         'return_days',
+        'approve',
     ];
 
     public function user()
@@ -30,4 +31,13 @@ class Order extends Model
     {
         return $this->hasMany(OrderItems::class);
     }
+
+    public function calculateTotalPrice()
+    {
+        $this->order_price = $this->orderItems()->sum('price'); 
+    
+        $this->save();
+    }
+
+
 }

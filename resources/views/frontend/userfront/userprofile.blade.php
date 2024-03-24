@@ -36,7 +36,21 @@
     </div>
 </div>
 
-
+    
+                        {{-- <div class="flex-shrink-0 ms-2">
+                            <ul class="list-inline mb-0 font-size-16">
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted px-1">
+                                        <i class="mdi mdi-trash-can-outline"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted px-1">
+                                        <i class="mdi mdi-heart-outline"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> --}}
 
 <style>
     body {

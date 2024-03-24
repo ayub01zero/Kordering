@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "anayarojo/shoppingcart": "^4.2",
         "filament/filament": "^3.2",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "php-flasher/flasher-notyf-laravel": "^1.15"

@@ -1,223 +1,142 @@
 @extends('frontend.frontbody.body')
 @section('interface')
-
-<div class="wrapper bg-white">
-    <form action="#">
-        <!-- Country Selection -->
-        <div class="form-group border-bottom d-flex align-items-center justify-content-between flex-wrap">
-            <label class="option my-sm-0 my-2">
-                <input type="radio" name="country" value="Turkey" checked> Turkey
-                <span class="checkmark"></span>
-            </label>
-            <label class="option my-sm-0 my-2">
-                <input type="radio" name="country" value="USA"> USA
-                <span class="checkmark"></span>
-            </label>
-        </div>
-
-        <!-- Link -->
-        <div class="form-group border-bottom">
-            <input type="url" class="form-control" required placeholder="Link">
-        </div>
-
-        <!-- Quantity, Color -->
-        <div class="form-group d-sm-flex margin">
-            <div class="d-flex align-items-center flex-fill me-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="number" required placeholder="Quantity" class="form-control">
-            </div>
-            <div class="d-flex align-items-center flex-fill ms-sm-1 my-sm-0 my-4 border-bottom position-relative">
-                <input type="text" required placeholder="Color" class="form-control">
+<div class="container crt rounded bg-white mt-3 mb-2">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img id="profileImage" class="img-fluid" src="{{asset('assets/img/noimage.webp')}}" alt="Profile Image">
             </div>
         </div>
-
-        <!-- Image -->
-        <div class="form-group border-bottom">
-            <input type="file" class="form-control" required accept="image/*">
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <h6>add order here</h6>
+                <form action="{{ route('Add.Cart') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <input type="file" class="form-control rounded-pill" placeholder="File" name="file" id="fileInput" value="">
+                            @error('file')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control rounded-pill" placeholder="Link" name="link" value="">
+                            @error('link')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <select class="form-control rounded-pill" name="country">
+                                <option value="">Select Country</option>
+                                <option value="USA">USA</option>
+                                <option value="Turkey">Turkey</option>
+                            </select>
+                            @error('country')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control rounded-pill" name="size">
+                                <option value="">Select Size</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                            @error('size')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control rounded-pill" placeholder="Color" name="color" value="">
+                            @error('color')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control rounded-pill" placeholder="Qty" name="qty" value="">
+                            @error('qty')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control rounded-pill" placeholder="Description" name="description" value="">
+                            @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btnmy btn-lg rounded-pill px-5">Add Order</button>
+                    </div>
+                </form>
+                
+            </div>
         </div>
-
-        <!-- Description -->
-        <div class="form-group">
-            <textarea class="form-control" required placeholder="Description"></textarea>
-        </div>
-
-        <!-- Search Button -->
-        <div class="form-group my-3">
-            <div class="btn melon rounded-0 d-flex justify-content-center text-center p-3">Order Now</div>
-        </div>
-    </form>
+    </div>
 </div>
 
-
 <style>
-
-
-/* Resetting */
-
-
-body {
-    background: #eecda3;
-  background: -webkit-linear-gradient(to right, #eecda3, #dab83d);
-  background: linear-gradient(to right, #eecda3, #dab83d);
-}
-.melon{
-    background-color: black!important;
-    color: #dab83d!important;
-}
-.wrapper {
-    max-width: 800px;
-    margin: 50px auto;
-}
-
-.wrapper form {
-    padding: 30px 50px;
-}
-
-.wrapper form .form-group {
-    padding-bottom: .5rem;
-}
-
-.wrapper form .option {
-    position: relative;
-    padding-left: 25px;
-    cursor: pointer;
-    display: block;
-}
-
-.wrapper form .option input {
-    display: none;
-}
-
-.wrapper form .checkmark {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    height: 17px;
-    width: 17px;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 50%;
-}
-
-.wrapper form .option input:checked~.checkmark:after {
-    display: block;
-}
-
-.wrapper form .option .checkmark:after {
-    content: "";
-    width: 7px;
-    height: 7px;
-    display: block;
-    border-radius: 50%;
-    background-color: #333;
-    position: absolute;
-    top: 48%;
-    left: 52%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 200ms ease-in-out 0s;
-}
-
-.wrapper form .option:hover input[type="radio"]~.checkmark {
-    background-color: #f4f4f4;
-}
-
-.wrapper form .option input[type="radio"]:checked~.checkmark {
-    background: #fff;
-    color: #fff;
-    transition: 300ms ease-in-out 0s;
-}
-
-.wrapper form .option input[type="radio"]:checked~.checkmark:after {
-    transform: translate(-50%, -50%) scale(1);
-    color: #fff;
-}
-
-.wrapper form a {
-    color: #333;
-}
-
-.wrapper form .form-control {
-    outline: none;
-    border: none;
-}
-
-.wrapper form .form-control:focus {
-    box-shadow: none;
-}
-
-.wrapper form input[type="text"]:focus::placeholder {
-    color: transparent
-}
-
-input[type="date"] {
-    cursor: pointer;
-}
-
-.wrapper form .label::after {
-    position: absolute;
-    /* background-color: #fff; */
-    top: 5px;
-    left: 0px;
-    font-size: 0.9rem;
-    margin: 0rem 0.4rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    font-weight: 600;
-    color: #999;
-    transition: all .2s ease-in-out;
-    transform: scale(0);
-}
-
-.wrapper form .label#from::after {
-    content: 'From';
-}
-
-.wrapper form .label#to::after {
-    content: 'To';
-}
-
-.wrapper form .label#depart::after {
-    content: 'Depart Date';
-}
-
-.wrapper form .label#return::after {
-    content: 'Return Date';
-}
-
-.wrapper form .label#psngr::after {
-    content: 'Traveller(s)';
-}
-
-.wrapper form input[type="text"]:focus~.label::after {
-    top: -15px;
-    left: 0px;
-    transform: scale(1);
-}
-
-.wrapper form input[type="date"]:focus~.label::after {
-    top: -15px;
-    left: 0px;
-    transform: scale(1);
-}
-
-/* Margin */
-.margin {
-    margin: 2rem 0rem;
-}
-
-/* Media Queries */
-@media(max-width: 575.5px) {
-    .wrapper {
-        margin: 10px;
+        .btnmy{
+       background-color: #dab83d!important;
+       border-color: #dab83d!important;
+       color: #fff!important;
+    }
+    
+    body {
+        background: #f8f9fa;
     }
 
-    .wrapper form {
-        padding: 20px;
+    /* .crt {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    } */
+
+    .form-control {
+        border: 1px solid #ced4da;
     }
 
-    .margin {
-        margin: .2rem 0rem;
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #6c757d;
     }
-}
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const fileInput = document.getElementById("fileInput");
+        const profileImage = document.getElementById("profileImage");
+
+        fileInput.addEventListener("change", function() {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+
+
 
 @endsection

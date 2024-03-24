@@ -18,7 +18,10 @@ class OrderItemsResource extends Resource
     protected static ?string $model = OrderItems::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    public static function canCreate(): bool
+    {
+        return false;
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -31,7 +34,7 @@ class OrderItemsResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('link')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->url(),
                 Forms\Components\TextInput::make('country')
                     ->required()
                     ->maxLength(255),
@@ -41,6 +44,9 @@ class OrderItemsResource extends Resource
                 Forms\Components\TextInput::make('color')
                     ->required()
                     ->maxLength(255),
+                    Forms\Components\TextInput::make('price')
+                    ->numeric()
+                    ->default(null),
                 Forms\Components\TextInput::make('qty')
                     ->required()
                     ->numeric(),
@@ -54,7 +60,7 @@ class OrderItemsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order_id')
+                Tables\Columns\TextColumn::make('order.invoice_num')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('image'),
@@ -69,6 +75,11 @@ class OrderItemsResource extends Resource
                 Tables\Columns\TextColumn::make('qty')
                     ->numeric()
                     ->sortable(),
+                    Tables\Columns\TextColumn::make('price')
+                    ->numeric()
+                    ->sortable(),
+                    Tables\Columns\TextColumn::make('description')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

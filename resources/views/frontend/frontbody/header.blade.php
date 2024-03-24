@@ -70,12 +70,28 @@
           <li><a class="nav-link scrollto" href="{{url('/brands')}}">Brands</a></li>
           
           @auth
-          <li class="dropdown"><a href=""><span>Shop</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown">
+            <a href=""><span>Shop</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{url('/add/order')}}">Add Order</a></li>
-              <li><a href="{{url('/cart')}}">Cart</a></li>
-             <li><a href="{{asset('/orders')}}">Orders</a></li>
+                <li><a href="{{url('/add/order')}}">Add Order</a></li>
+                <li>
+                    @if(session()->has('cart'))
+                        <a href="{{url('/cart')}}">Cart 
+                            @php
+                                $cartCount = count(session('cart'));
+                            @endphp
+                            @if($cartCount > 0)
+                                {{$cartCount}}
+                            @endif
+                        </a>
+                    @else
+                        <a href="{{url('/cart')}}">Cart</a>
+                    @endif
+                </li>
+                <li><a href="{{asset('/orders')}}">Orders</a></li>
             </ul>
+        </li>
+        
           </li>
           <li><a class="nav-link scrollto" href="{{url('/user/profile')}}">profile</a></li>
           <li><a class="nav-link scrollto" href="{{route('logout.auth')}}">Logout</a></li>
