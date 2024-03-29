@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Section;
+
 
 
 
@@ -21,7 +23,7 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-check';
     public static function canCreate(): bool
     {
         return false;
@@ -46,24 +48,25 @@ class OrderResource extends Resource
                 ])
                     ->required()
                     ->native(false),
-                Forms\Components\TextInput::make('total_price')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('qty')
+                    Forms\Components\TextInput::make('qty')
                     ->required()
                     ->numeric()->readonly(),
-                Forms\Components\TextInput::make('international_fee')
-                    ->numeric()
-                    ->default(null),
+                    Forms\Components\TextInput::make('return_days')
+                    ->numeric(),
+                    Section::make()
+                    ->description('Add the price to the order')
+    ->schema([
+        
+        Forms\Components\TextInput::make('international_fee')
+                    ->numeric(),
                 Forms\Components\TextInput::make('custom_fee')
-                    ->numeric()
-                    ->default(null),
+                    ->numeric(),
                 Forms\Components\TextInput::make('order_price')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('return_days')
-                    ->numeric()
-                    ->default(null),
+                    ->numeric(),
+                    Forms\Components\TextInput::make('total_price')
+                    ->numeric(),  // ...
+    ])->columns(2),
+              
                     Forms\Components\Toggle::make('approve') // Or Checkbox::make('approve')
                 ->label('Approved'),
             ]);

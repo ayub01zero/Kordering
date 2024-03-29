@@ -32,7 +32,7 @@ class ProfileController extends Controller
         $user->update($request->all());
         NotificationHelper::show('profile update successfully','success');
 
-        return redirect()->back();;
+        return redirect()->back();
     }
 
 

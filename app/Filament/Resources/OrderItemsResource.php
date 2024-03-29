@@ -17,7 +17,7 @@ class OrderItemsResource extends Resource
 {
     protected static ?string $model = OrderItems::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-shopping-cart';
     public static function canCreate(): bool
     {
         return false;
@@ -45,6 +45,7 @@ class OrderItemsResource extends Resource
                     ->required()
                     ->maxLength(255),
                     Forms\Components\TextInput::make('price')
+                    ->live()
                     ->numeric()
                     ->default(null),
                 Forms\Components\TextInput::make('qty')

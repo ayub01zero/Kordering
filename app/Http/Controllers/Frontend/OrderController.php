@@ -16,6 +16,7 @@ class OrderController extends Controller
         $userId = Auth::id();
 
         // Fetch orders of the authenticated user with their associated order items
+        // developed by ayo
         $orders = Order::where('user_id', $userId)->with('orderItems')->get();
 
         // Fetch exchange rate
@@ -26,10 +27,12 @@ class OrderController extends Controller
 
     private function fetchExchangeRate($apiKey)
     {
+        // get api response from exchange rate api
         $response = Http::withoutVerifying()->get('https://api.exchangerate-api.com/v4/latest/USD', [
             'access_key' => $apiKey
         ]);
-
+        
+         // check if exchange rate is available and return it
         if ($response->successful()) {
             $data = $response->json();
             return $data['rates']['IQD'] ?? null;
