@@ -16,7 +16,7 @@ class OrderController extends Controller
         $userId = Auth::id();
 
         // Fetch orders of the authenticated user with their associated order items
-        // developed by ayo
+        // developed by rezhin & soz & shokra 
         $orders = Order::where('user_id', $userId)->with('orderItems')->get();
 
         // Fetch exchange rate

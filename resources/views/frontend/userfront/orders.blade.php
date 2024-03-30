@@ -45,7 +45,7 @@
                                 <div class="col-md-4">
                                     <div class="mt-3">
                                         <p class="text-muted mb-2">Price</p>
-                                        <h5 class="mb-0 mt-2"><span class="text-muted me-2"></span>${{$item->price}}</h5>
+                                        <h5 class="mb-0 mt-2 order-price" data-price="{{ $item->price }}"><span class="text-muted me-2" ></span>{{$item->price}}</h5>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -112,19 +112,6 @@
                             <tr>
                                 <td>Custom fee :</td>
                                 <td class="text-end order-price" data-price="{{ $order->custom_fee }}">{{ $order->custom_fee }}</td>
-                            </tr>
-                            <tr>
-                                <td>Select Currency:</td>
-                                <td class="text-end">
-                                    <div class="input-group">
-                                        <select class="form-select shadow-none border-0" name="currency" id="currency">
-                                            <option value="usd">USD</option>
-                                            <option value="iraq">IQD</option>
-                                            <!-- Add more options for other currencies as needed -->
-                                        </select>
-                                        <label class="input-group-text" for="currency"><i class="fas fa-money-bill-wave"></i></label>
-                                    </div>
-                                </td>
                             </tr>
                             <tr class="bg-light">
                                 <th>Total :</th>

@@ -74,7 +74,7 @@ class CartController extends Controller
         }
     }
     
-     ///developed by ayoooo
+     ///developed by rezhin
     // If the item was found, remove it from the cart and delete the associated image
     if ($itemIndex !== null) {
         // Delete image from storage
