@@ -16,10 +16,10 @@ class OrderController extends Controller
         $userId = Auth::id();
 
         // Fetch orders of the authenticated user with their associated order items
-        // developed by ayo
+        // developed by ayub for => rezhin & soz & shokra 
         $orders = Order::where('user_id', $userId)->with('orderItems')->get();
 
-        // Fetch exchange rate
+        // Fetch exchange rate 
         $exchangeRate = $this->fetchExchangeRate(config('services.exchange_rate_api.key'));
 
         return view('frontend.userfront.orders', compact('orders', 'exchangeRate'));
@@ -32,6 +32,7 @@ class OrderController extends Controller
             'access_key' => $apiKey
         ]);
         
+
          // check if exchange rate is available and return it
         if ($response->successful()) {
             $data = $response->json();

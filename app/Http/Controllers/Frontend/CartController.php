@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Filament\Resources\OrderItemsResource;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
-use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Helpers\NotificationHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
@@ -30,7 +27,7 @@ class CartController extends Controller
             'description' => 'required',
         ]);
     
-        // Generate a unique identifier for the cart item
+        // Generate a unique identifier for the cart items
         $cartItemId = uniqid();
         $image = $request->file('file');
     
@@ -74,7 +71,7 @@ class CartController extends Controller
         }
     }
     
-     ///developed by ayoooo
+   
     // If the item was found, remove it from the cart and delete the associated image
     if ($itemIndex !== null) {
         // Delete image from storage
@@ -110,8 +107,8 @@ public function processCheckout(Request $request)
         'status' => 'pending',
         'total_price' => null,
         'qty' => 0,
-        'international_fee' => null,
-        'custom_fee' => null,
+        'international_fee' => 12,
+        'custom_fee' => 5,
         'order_price' => null,
         'return_days' => null,
         'created_at' => Carbon::now(),

@@ -47,12 +47,12 @@
                                         </td>
                                         <td class="border-0 align-middle"><strong>{{ $item['size'] }}</strong></td>
                                         <td class="border-0 align-middle"><strong>{{ $item['color'] }}</strong></td>
-                                        <td class="border-0 align-middle text-center"><strong>{{ $item['qty'] }}</strong></td>
-                                        <td class="border-0 align-middle text-center">
+                                        <td class="border-0 align-middle "><strong>{{ $item['qty'] }}</strong></td>
+                                        <td class="border-0 align-middle ">
                                             <form action="{{ route('cart.remove', ['id' => $item['id']]) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-link text-danger"><i class="fa fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-link border-0 align-middle text-danger"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>

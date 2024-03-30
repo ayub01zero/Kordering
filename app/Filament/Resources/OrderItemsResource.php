@@ -63,7 +63,8 @@ class OrderItemsResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('order.invoice_num')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('link')
                     ->searchable(),

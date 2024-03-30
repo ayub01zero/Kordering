@@ -11,6 +11,10 @@ use App\Http\Controllers\Frontend\OrderController;
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/about', [ContactController::class, 'index'])->name('about.us');
 
+
+
+
+
 Route::middleware('auth')->group(function () {
 //profile routes
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.updatee');
@@ -39,6 +43,11 @@ Route::get('/add/order', function () {
 })->name('add.order');
 
 });
+
+
+
+
+
 
 Route::get('/about', [ContactController::class, 'index'])->name('about.us');
 
