@@ -6,6 +6,10 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
+use Filament\Forms\Get;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Set;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,6 +19,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Placeholder;
+use Filament\Tables\Columns\Summarizers\Summarizer;
+
 
 
 
@@ -28,6 +35,12 @@ class OrderResource extends Resource
     {
         return false;
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withSum('OrderItems', 'price');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -56,15 +69,31 @@ class OrderResource extends Resource
                     Section::make()
                     ->description('Add the price to the order')
     ->schema([
-        
         Forms\Components\TextInput::make('international_fee')
-                    ->numeric(),
+                    ->numeric()
+                    ->required()
+                    ->default(5),
                 Forms\Components\TextInput::make('custom_fee')
-                    ->numeric(),
+                    ->numeric()
+                    ->required()
+                    ->default(2),
                 Forms\Components\TextInput::make('order_price')
-                    ->numeric(),
+                    ->numeric()
+                ->required(),
                     Forms\Components\TextInput::make('total_price')
-                    ->numeric(),  // ...
+                    ->numeric()
+                    ->required()
+                    ->live(true)
+                    ->readonly(),
+                    Forms\Components\Placeholder::make('all_price')
+    ->content(function (Get $get, Set $set): string {
+        $total_price = $get('international_fee') + $get('custom_fee') + $get('order_price');
+        $set('total_price', $total_price);
+        return '$' . number_format($total_price, 2);
+    }),
+
+                
+                  // ...
     ])->columns(2),
               
                     Forms\Components\Toggle::make('approve') // Or Checkbox::make('approve')
@@ -87,12 +116,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('invoice_num')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('total_price')
-                    ->numeric()
-                    ->sortable()->money('USD'),
                 Tables\Columns\TextColumn::make('qty')
                     ->numeric()
                     ->sortable(),
+                    Tables\Columns\TextColumn::make('total_price')
+                    ->numeric()
+                    ->sortable()->money('USD'),
                 Tables\Columns\TextColumn::make('international_fee')
                     ->numeric()
                     ->sortable()
@@ -100,7 +129,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('custom_fee')
                     ->numeric()
                     ->sortable()->money('USD'),
-                    Tables\Columns\TextColumn::make('order_price')->sum('OrderItems', 'price')
+                    TextColumn::make('order_price')->sum('OrderItems', 'price')
                     ->numeric()
                     ->sortable()
                     ->money('USD'),

@@ -34,9 +34,7 @@ class Order extends Model
 
     public function calculateTotalPrice()
     {
-        $this->order_price = $this->orderItems()->sum('price'); 
-    
-        $this->save();
+        return $this->orderItems->sum('price');
     }
 
 
