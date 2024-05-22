@@ -21,6 +21,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Placeholder;
 use Filament\Tables\Columns\Summarizers\Summarizer;
+use Filament\Tables\Columns\Summarizers\Sum;
+
 
 
 
@@ -129,7 +131,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('custom_fee')
                     ->numeric()
                     ->sortable()->money('USD'),
-                    TextColumn::make('order_price')->sum('OrderItems', 'price')
+                    TextColumn::make('order_price')->Sum('OrderItems', 'price')
                     ->numeric()
                     ->sortable()
                     ->money('USD'),

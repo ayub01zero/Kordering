@@ -30,7 +30,7 @@ class CartController extends Controller
             'description' => 'required',
         ]);
     
-        // Generate a unique identifier for the cart item
+        // Generate a unique identifier for the cart items
         $cartItemId = uniqid();
         $image = $request->file('file');
     
@@ -74,7 +74,7 @@ class CartController extends Controller
         }
     }
     
-     ///developed by rezhin
+   
     // If the item was found, remove it from the cart and delete the associated image
     if ($itemIndex !== null) {
         // Delete image from storage
