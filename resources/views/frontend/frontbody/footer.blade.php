@@ -24,9 +24,9 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Contact us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url('/')}}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url('/about')}}">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url('/about')}}">Contact us</a></li>
              
             </ul>
           </div>
@@ -34,8 +34,8 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Brands</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">All brands</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{{url('/brands')}}">Brands</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{{url('/brands')}}">All brands</a></li>
             </ul>
           </div>
 

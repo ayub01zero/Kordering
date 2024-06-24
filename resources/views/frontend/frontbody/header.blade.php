@@ -10,11 +10,12 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  {{-- <link href="{{asset('assets/img/favicon.png')}}" rel="icon"> --}}
-  {{-- <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon"> --}}
+  <link href="{{asset('assets/img/bloger.png')}}" rel="icon">
+  <link href="{{asset('assets/img/bloger.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
   <!-- Vendor CSS Files -->
   <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
@@ -27,13 +28,7 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: BizLand
-  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-  * Updated: Mar 17 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -57,42 +52,72 @@
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="index.html">K<span>ordering</span></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
+      <h1 class="logo"><a href="{{route('dashboard')}}">K<span>ordering</span></a></h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{{url('/dashboard')}}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{url('/about')}}">About us</a></li>
+          <li><a class="nav-link scrollto active" href="{{url('/')}}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{route('about.us')}}">About us</a></li>
           <li><a class="nav-link scrollto" href="{{url('/brands')}}">Brands</a></li>
-          <li class="dropdown"><a href=""><span>Shop</span> <i class="bi bi-chevron-down"></i></a>
+          @auth
+          <li class="dropdown">
+            <a href="#"><span>Shop</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{url('/add/order')}}">Add Order</a></li>
-              <li><a href="{{url('/cart')}}">Cart</a></li>
-             <li><a href="{{asset('/orders')}}">Orders</a></li>
+              <li>
+                @if(session()->has('cart'))
+                <a href="{{url('/cart')}}">Cart 
+                  @php
+                  $cartCount = count(session('cart'));
+                  @endphp
+                  @if($cartCount > 0)
+                  {{$cartCount}}
+                  @endif
+                </a>
+                @else
+                <a href="{{url('/cart')}}">Cart</a>
+                @endif
+              </li>
+              <li><a href="{{route('orders.all')}}">Orders</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="{{url('/user/profile')}}">profile</a></li>
+          <li><a class="nav-link scrollto" href="{{url('/user/profile')}}">Profile</a></li>
+          <li><a class="nav-link scrollto" href="{{route('logout.auth')}}">Logout</a></li>
+          @endauth
+          @guest
           <li><a class="nav-link scrollto" href="{{url('/login')}}">Login</a></li>
+          @endguest
+          <!-- Currency Dropdown -->
+          <li>
+            <div class="input-group">
+              <select class="form-select shadow-none border-0" name="currency" id="currency">
+                <option value="usd">USD</option>
+                <option value="iraq">IQD</option>
+                <!-- Add more options for other currencies as needed -->
+              </select>
+            </div>
+          </li>
+          <!-- End Currency Dropdown -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
     </div>
   </header><!-- End Header -->
+  
 
   <!-- ======= Hero Section ======= -->
+  @if(request()->url() != route('add.order'))
   <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
       <h1>Welcome to <span>Kordering</span></h1>
       <h2>we are as a team work with customer to shipping thier product</h2>
       <h2>we are as a team work with customer to shipping thier product</h2>
       <div class="d-flex">
-        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <a href="{{ route('add.order') }}" class="btn-get-started scrollto">Get Started</a>
       </div>
     </div>
   </section><!-- End Hero -->
+  @endif
   <main id="main">
-
+<style>
+  
+</style>
