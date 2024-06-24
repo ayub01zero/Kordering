@@ -9,18 +9,22 @@ use Filament\Forms;
 use Filament\Forms\Get;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
+<<<<<<< HEAD
+=======
 use Filament\Forms\Components\Actions\Action;
+>>>>>>> 217efaeae09abad163760272f6ccbd8f0a4f51e4
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Placeholder;
+<<<<<<< HEAD
+=======
 use Filament\Tables\Columns\Summarizers\Summarizer;
+>>>>>>> 217efaeae09abad163760272f6ccbd8f0a4f51e4
 use Filament\Tables\Columns\Summarizers\Sum;
 
 

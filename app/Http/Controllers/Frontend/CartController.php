@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Filament\Resources\OrderItemsResource;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
-use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Helpers\NotificationHelper;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
