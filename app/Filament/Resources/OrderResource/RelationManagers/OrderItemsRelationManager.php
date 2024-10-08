@@ -36,9 +36,7 @@ class OrderItemsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('qty')
                     ->required()
                     ->numeric(),
-                    Forms\Components\TextInput::make('price')
-                    ->numeric()
-                    ->default(null),
+                  
                     Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required(),
@@ -68,9 +66,7 @@ class OrderItemsRelationManager extends RelationManager
             Tables\Columns\TextColumn::make('qty')
                 ->numeric()
                 ->sortable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->numeric()
-                    ->sortable(),
+              
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
             Tables\Columns\TextColumn::make('created_at')

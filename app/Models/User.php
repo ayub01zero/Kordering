@@ -8,11 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable 
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable ;
+    use HasRoles;
+
+
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -52,10 +58,6 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->role === 'admin';
-    }
 
     public function orders()
     {

@@ -1,0 +1,20 @@
+/* public/css/fonts.css */
+@font-face {
+    font-family: 'Speda Regular';
+    src: url('../fonts/Speda Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Apply the custom font for Kurdish (ku) */
+body:lang(ku) {
+    font-family: "Speda Regular", sans-serif !important;
+    font-weight: 400;
+}
+
+
+/* For English, do NOT apply the custom font, keep default */
+body:lang(en) {
+    font-family: sans-serif !important;
+    font-weight: 400;
+}

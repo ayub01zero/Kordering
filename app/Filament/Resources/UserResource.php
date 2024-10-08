@@ -12,39 +12,81 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use PhpParser\Node\Stmt\Label;
+use AbanoubNassem\FilamentGRecaptchaField\Forms\Components\GRecaptcha;
+
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bars-3-center-left';
 
-    public static function canCreate(): bool
-{
-    return false;
-}
+    public static function getnavigationGroup(): string
+    {
+        return __('CRM'); 
+    }
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?int $navigationSort = 3;
+
+
+    public static function getmodelLabel(): string
+    {
+        return __('User');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('users');
+    }
+    public static function getPluralModelLabel(): string
+    {
+        return __('User');
+    }
+//     public static function canCreate(): bool
+// {
+//     return false;
+// }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->label(__('user_name'))
+                    ->maxLength(255)
+                   ->label(__(key: 'user')), 
                 Forms\Components\TextInput::make('email')
                     ->email()
+                    ->label(__('email_address'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ,
                 Forms\Components\DatePicker::make('Date_of_Birth'),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
-                    ->maxLength(255)
-                    ->default(null),
+                    ->label(__('phone_number'))
+                    ->default(null)
+                    ->step(10)
+                    ->numeric()
+                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
                 Forms\Components\TextInput::make('address')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\TextInput::make('city')
                     ->maxLength(255)
-                    ->default(null),
+                    ->default(null)
+                    ->translateLabel(),
+                    Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
+                    GRecaptcha::make('captcha')
+
             ]);
     }
 
@@ -55,7 +97,12 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Email address copied')
+                    ->copyMessageDuration(1500)
+                    ->icon('heroicon-m-envelope')
+                    ->iconColor('primary'),
                 Tables\Columns\TextColumn::make('role'),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
@@ -88,6 +135,17 @@ class UserResource extends Resource
             ]);
     }
 
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('name')->label(__('user_name')),
+                TextEntry::make('email')->label(__('email')),
+
+            ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -96,6 +154,8 @@ class UserResource extends Resource
         ];
     }
 
+  
+    
     public static function getPages(): array
     {
         return [

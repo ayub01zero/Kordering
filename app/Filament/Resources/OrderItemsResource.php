@@ -44,10 +44,7 @@ class OrderItemsResource extends Resource
                 Forms\Components\TextInput::make('color')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\TextInput::make('price')
-                    ->live()
-                    ->numeric()
-                    ->default(null),
+                 
                 Forms\Components\TextInput::make('qty')
                     ->required()
                     ->numeric(),
@@ -77,9 +74,7 @@ class OrderItemsResource extends Resource
                 Tables\Columns\TextColumn::make('qty')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('price')
-                    ->numeric()
-                    ->sortable(),
+                
                     Tables\Columns\TextColumn::make('description')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
